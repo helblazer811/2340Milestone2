@@ -1,0 +1,32 @@
+apply plugin: 'java'
+defaultTasks 'jar'
+sourceCompatibility = '1.8'
+
+dependencies {
+	compile files('lib/resources.jar')
+}
+
+jar {
+	manifest {
+		attributes('Main-Class' : 'edu.gatech.oad.antlab.pkg1.AntLabMain',
+				   'Class-Path' : 'lib/resources.jar')
+	}
+	archiveName = 'build.jar'
+	destinationDir = file(".")
+}
+
+clean {
+	delete 'build.jar'
+	delete 'build'
+}
+
+//does not require any configuration for now
+compileJava {
+
+}
+
+javadoc {
+	source = sourceSets.main.allJava
+	classpath = configurations.compile
+}
+
